@@ -4,6 +4,7 @@
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "emotion"
+    "emotion",
+    "syntax-dynamic-import"
   ]
 }

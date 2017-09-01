@@ -15,7 +15,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, `build/client`),
     filename: 'bundle.js',
-    publicPath: 'http://localhost:3020/',
+    publicPath: DEV && 'http://localhost:3020/' || `/static/`,
   },
   module: {
     loaders: [
