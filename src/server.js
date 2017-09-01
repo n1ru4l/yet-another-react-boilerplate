@@ -15,29 +15,29 @@ const app = new Express()
 if (process.env.NODE_ENV === `production`) {
   app.use(`/static`, Express.static(path.join(process.cwd(), `build/client`)))
 } else {
-  app.use('/static', proxy({ target: 'http://localhost:3020', pathRewrite: { '^/static': '' } }))
+  app.use(
+    '/static',
+    proxy({ target: 'http://localhost:3020', pathRewrite: { '^/static': '' } })
+  )
 }
 
 app.use((request, response) => {
   const context = {}
 
   const component = (
-    <StaticRouter
-      locaction={request.url}
-      context={context}>
-        <Main/>
+    <StaticRouter locaction={request.url} context={context}>
+      <Main />
     </StaticRouter>
   )
 
-  const content = ReactDOM.renderToString(component);
+  const content = ReactDOM.renderToString(component)
 
-  const markup = (
-    <Html content={content}/>
-  )
+  const markup = <Html content={content} />
 
   response.send(`<!doctype html>\n${ReactDOM.renderToStaticMarkup(markup)}`)
   response.end()
 })
 
-
-app.listen(PORT, () => console.log(`App Server is now running on http://localhost:${PORT}`))
+app.listen(PORT, () =>
+  console.log(`App Server is now running on http://localhost:${PORT}`)
+)
