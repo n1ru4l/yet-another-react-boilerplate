@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/server'
+import { extractCritical } from 'emotion-server'
 import Express from 'express'
 
 import { StaticRouter } from 'react-router'
@@ -31,8 +32,9 @@ app.use((request, response) => {
   )
 
   const content = ReactDOM.renderToString(component)
+  const styles = extractCritical(content)
 
-  const markup = <Html content={content} />
+  const markup = <Html content={content} styles={styles} />
 
   response.send(`<!doctype html>\n${ReactDOM.renderToStaticMarkup(markup)}`)
   response.end()
