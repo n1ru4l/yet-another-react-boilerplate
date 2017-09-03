@@ -8,23 +8,30 @@ import {
   createAsyncContext,
 } from 'react-async-component'
 import asyncBootstrapper from 'react-async-bootstrapper'
+import { ApolloProvider } from 'react-apollo'
+import { createApolloClient } from './lib/create-apollo-client'
 
 import { Main } from './components/main'
 
+const apolloClient = createApolloClient({
+  initialState: window.__APOLLO_STATE__ || {},
+})
+
+const rehydrateState = window.__ASYNC_STATE__ || {}
+
 const app = (
-  <AsyncComponentProvider rehydrateState={window.__ASYNC_STATE__}>
-    <BrowserRouter>
-      <Main />
-    </BrowserRouter>
+  <AsyncComponentProvider rehydrateState={rehydrateState}>
+    <ApolloProvider client={apolloClient}>
+      <BrowserRouter>
+        <Main />
+      </BrowserRouter>
+    </ApolloProvider>
   </AsyncComponentProvider>
 )
 
 const renderApp = () => render(app, document.getElementById(`content`))
 
-const initialRender = () =>
-  asyncBootstrapper(app).then(() => {
-    return renderApp()
-  })
+const initialRender = () => asyncBootstrapper(app).then(renderApp)
 
 if (window.__EMOTION_IDS__) {
   hydrate(window.__EMOTION_IDS__)

@@ -25,6 +25,7 @@ export const Header = () => (
     <h1>Yet Another React Boilerplate</h1>
     <StyledNav>
       <Link to="/home">Home</Link>
+      <Link to="/reddit">Reddit</Link>
       <Link to="/about">About</Link>
     </StyledNav>
   </StyledHeader>

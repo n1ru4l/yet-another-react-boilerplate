@@ -23,13 +23,25 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         exclude: /(node_modules)/,
+        options: {
+          babelrc: false,
+          presets: [
+            `react`,
+          ],
+          plugins: [
+            // "react-hot-loader/babel",
+            `emotion`,
+            `syntax-dynamic-import`,
+            `transform-class-properties`,
+          ]
+        }
       },
-    ]
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(DEV ? 'development' : 'production'),
+        'NODE_ENV': JSON.stringify(DEV ? `development` : `production`),
       },
     }),
     DEV && new webpack.optimize.UglifyJsPlugin({
@@ -52,5 +64,5 @@ module.exports = {
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
-  }
+  },
 }

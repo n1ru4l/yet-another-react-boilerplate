@@ -1,6 +1,12 @@
 import React from 'react'
 
-export const Html = ({ content, styles, children, asyncState }) => (
+export const Html = ({
+  content,
+  styles,
+  children,
+  asyncState,
+  apolloState,
+}) => (
   <html lang="en">
     <head>
       <meta charSet="utf-8" />
@@ -17,6 +23,11 @@ export const Html = ({ content, styles, children, asyncState }) => (
       <script
         dangerouslySetInnerHTML={{
           __html: `window.__EMOTION_IDS__ = ${JSON.stringify(styles.ids)}`,
+        }}
+      />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.__APOLLO_STATE__ = ${JSON.stringify(apolloState)}`,
         }}
       />
       <script

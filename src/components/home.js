@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Home = () => (
   <div>
-    <h1>Hello World</h1>
+    <h2>Hello World</h2>
     <p>
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
       eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
@@ -23,3 +23,5 @@ export const Home = () => (
     </ul>
   </div>
 )
+
+export default Home

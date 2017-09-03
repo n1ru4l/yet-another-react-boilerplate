@@ -2,7 +2,9 @@ import React from 'react'
 
 export const About = () => (
   <div>
-    <h1>This is the about route</h1>
+    <h2>This is the about route</h2>
     <p>aksdajksdgaksdas dasdas asdasdaSas dsdsadas kek</p>
   </div>
 )
+
+export default About

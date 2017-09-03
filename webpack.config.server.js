@@ -20,20 +20,35 @@ module.exports = {
     if (/^[a-z0-9-][a-z0-9-./]+$/.test(request)) {
       return callback(null, `commonjs ${request}`);
     }
-    callback()
+    callback();
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
+        loader: `babel-loader`,
         exclude: /(node_modules)/,
+        options: {
+          babelrc: false,
+          presets: [
+            `react`,
+          ],
+          plugins: [
+            `emotion`,
+            `syntax-dynamic-import`,
+            `transform-class-properties`,
+          ],
+        }
       },
     ],
   },
   plugins: [
+    new WriteFilePlugin,
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(DEV ? 'development' : 'production'),
+      'process.env.NODE_ENV': JSON.stringify(DEV ? `development` : `production`),
+    }),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,                               
     }),
   ],
   node: {
@@ -44,5 +59,5 @@ module.exports = {
     __filename: false,
     __dirname: false,
     setImmediate: false,
-  }
+  },
 }

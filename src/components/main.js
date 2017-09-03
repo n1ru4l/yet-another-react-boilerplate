@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router'
 import { asyncComponent } from 'react-async-component'
 
 import { Header } from './header'
+import { NotFound404 } from './not-found-404'
 
 injectGlobal`
   * {
@@ -17,14 +18,21 @@ injectGlobal`
   }
 `
 
+const LoadingComponent = () => <div>Loading...</div>
+
 const HomeLoadable = asyncComponent({
   resolve: () => import(`./home`).then(({ Home }) => Home),
-  LoadingComponent: () => <div>Loading...</div>,
+  LoadingComponent,
 })
 
 const AboutLoadable = asyncComponent({
   resolve: () => import(`./about`).then(({ About }) => About),
-  LoadingComponent: () => <div>Loading...</div>,
+  LoadingComponent,
+})
+
+const RedditLoadable = asyncComponent({
+  resolve: () => import(`./reddit`).then(({ Reddit }) => Reddit),
+  LoadingComponent,
 })
 
 const StyledContentContainer = styled(`div`)`
@@ -39,6 +47,8 @@ export const Main = () => (
       <Switch>
         <Route path="/home" component={HomeLoadable} />
         <Route path="/about" component={AboutLoadable} />
+        <Route path="/reddit" component={RedditLoadable} />
+        <Route component={NotFound404} />
       </Switch>
     </StyledContentContainer>
   </div>
