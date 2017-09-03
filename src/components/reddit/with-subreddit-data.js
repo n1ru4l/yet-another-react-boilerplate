@@ -1,20 +1,6 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-
-const subredditQuery = gql`
-  query movies($subreddit: String!) {
-    reddit {
-      subreddit(name: $subreddit) {
-        name
-        hotListings(limit: 10) {
-          fullnameId
-          title
-          numComments
-        }
-      }
-    }
-  }
-`
+import subredditQuery from './subreddit-query.graphql'
 
 export const withSubredditData = graphql(subredditQuery, {
   options: ({ subreddit }) => ({

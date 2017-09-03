@@ -1,0 +1,12 @@
+query subreddit($subreddit: String!) {
+  reddit {
+    subreddit(name: $subreddit) {
+      name
+      hotListings(limit: 10) {
+        fullnameId
+        title
+        numComments
+      }
+    }
+  }
+}

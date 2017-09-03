@@ -40,10 +40,14 @@ module.exports = {
           ],
         }
       },
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: `graphql-tag/loader`,
+      },
     ],
   },
   plugins: [
-    new WriteFilePlugin,
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(DEV ? `development` : `production`),
     }),
