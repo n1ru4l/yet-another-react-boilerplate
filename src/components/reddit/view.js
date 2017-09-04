@@ -24,10 +24,12 @@ export const View = ({
       onChange={onChangeInput}
       onSubmit={onSubmitInput}
     />
-    {error 
-      ? <p>There is no subreddit with that name.</p>
-      : isLoading
-        ? 'Loading...'
-        : <TopicList listings={hotListings} />}
+    {error ? (
+      <p>There is no subreddit with that name.</p>
+    ) : isLoading ? (
+      'Loading...'
+    ) : (
+      <TopicList listings={hotListings} />
+    )}
   </div>
 )

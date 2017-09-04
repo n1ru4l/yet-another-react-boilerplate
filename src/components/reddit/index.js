@@ -1,37 +1,38 @@
 import React from 'react'
+import { withStateHandlers, compose } from 'recompose'
+import { graphql } from 'react-apollo'
 
 import { View } from './view'
-import { withSubredditData } from './with-subreddit-data'
+import subredditQuery from './subreddit-query.graphql'
 
-const ViewWithData = withSubredditData(View)
+const withSubredditData = graphql(subredditQuery, {
+  options: ({ subreddit }) => ({
+    variables: { subreddit },
+  }),
+  props: ({ ownProps, data: { loading: isLoading, reddit, error } }) => ({
+    isLoading,
+    error,
+    hotListings: reddit ? reddit.subreddit.hotListings : undefined,
+    ...ownProps,
+  }),
+})
 
-export class Reddit extends React.Component {
-
-  state = {
+const withFormState = withStateHandlers(
+  {
     subreddit: `movies`,
     inputValue: `movies`,
+  },
+  {
+    onChangeInput: () => ev => ({
+      inputValue: ev.target.value,
+    }),
+    onSubmitInput: ({ inputValue }) => ev => {
+      ev.preventDefault()
+      return { subreddit: inputValue }
+    },
   }
+)
 
-  onChangeInput = ev => {
-    this.setState({ inputValue: ev.target.value })
-  }
+const enhance = compose(withFormState, withSubredditData)
 
-  onSubmitInput = ev => {
-    const { inputValue } = this.state
-    this.setState({ subreddit: inputValue })
-    console.log(inputValue)
-    ev.preventDefault()
-  }
-
-  render() {
-    const { inputValue, subreddit } = this.state
-    return (
-      <ViewWithData
-        subreddit={subreddit}
-        inputValue={inputValue}
-        onChangeInput={this.onChangeInput}
-        onSubmitInput={this.onSubmitInput}
-      />
-    )
-  }
-}
+export const Reddit = enhance(View)
