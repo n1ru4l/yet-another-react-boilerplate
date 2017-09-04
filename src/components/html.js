@@ -6,6 +6,7 @@ export const Html = ({
   children,
   asyncState,
   apolloState,
+  helmet,
 }) => (
   <html lang="en">
     <head>
@@ -16,7 +17,9 @@ export const Html = ({
         href="https://fonts.googleapis.com/css?family=Roboto"
         rel="stylesheet"
       />
-      <title>Yet Another React Boilerplate</title>
+      {helmet.title.toComponent()}
+      {helmet.meta.toComponent()}
+      {helmet.link.toComponent()}
     </head>
     <body>
       <div id="content" dangerouslySetInnerHTML={{ __html: content }} />

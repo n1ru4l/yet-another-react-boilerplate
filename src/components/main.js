@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router'
 import { asyncComponent } from 'react-async-component'
 
 import { Header } from './header'
+import { Helmet } from 'react-helmet'
 import { NotFound404 } from './not-found-404'
 
 injectGlobal`
@@ -42,6 +43,10 @@ const StyledContentContainer = styled(`div`)`
 
 export const Main = () => (
   <div>
+    <Helmet
+      titleTemplate="%s | Yet Another React Boilerplate"
+      defaultTitle="Yet Another React Boilerplate"
+    />
     <Header />
     <StyledContentContainer>
       <Switch>

@@ -8,6 +8,7 @@ import {
   createAsyncContext,
 } from 'react-async-component'
 import asyncBootstrapper from 'react-async-bootstrapper'
+import { Helmet } from 'react-helmet'
 import Express from 'express'
 import noFavicon from 'express-no-favicons'
 
@@ -62,6 +63,7 @@ app.use(async (request, response) => {
   const styles = extractCritical(content)
   const asyncState = asyncContext.getState()
   const apolloState = client.store.getState()
+  const helmet = Helmet.renderStatic()
 
   const markup = (
     <Html
@@ -69,6 +71,7 @@ app.use(async (request, response) => {
       styles={styles}
       asyncState={asyncState}
       apolloState={apolloState}
+      helmet={helmet}
     />
   )
 

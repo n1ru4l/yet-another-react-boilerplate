@@ -1,7 +1,11 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
 export const Home = () => (
   <div>
+    <Helmet>
+      <title>Home</title>
+    </Helmet>
     <h2>Hello World</h2>
     <p>
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy

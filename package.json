@@ -25,6 +25,7 @@
     "react-async-component": "^1.0.0-beta.3",
     "react-dom": "^15.6.1",
     "react-emotion": "^7.2.0",
+    "react-helmet": "^5.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2"
   },
