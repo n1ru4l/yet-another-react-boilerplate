@@ -1,10 +1,21 @@
+// @flow
 import React from 'react'
+import type { HotListing } from './types'
 
-const TopicListItem = ({ title, commentCount }) => (
+type TopicListItemProps = {
+  title: string,
+  commentCount: number,
+}
+
+const TopicListItem = ({ title, commentCount }: TopicListItemProps) => (
   <li>{`${title} (${commentCount})`}</li>
 )
 
-export const TopicList = ({ listings }) => (
+type TopicListProps = {
+  listings: Array<HotListing>
+}
+
+export const TopicList = ({ listings }: TopicListProps) => (
   <ul>
     {listings.map(listing => (
       <TopicListItem

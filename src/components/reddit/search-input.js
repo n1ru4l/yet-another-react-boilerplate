@@ -1,6 +1,13 @@
+// @flow
 import React from 'react'
 
-export const SearchInput = ({ value, onChange, onSubmit }) => (
+type SearchInputProps = {
+  value: string,
+  onChange: (ev: Event) => void,
+  onSubmit: (ev: Event) => void,
+}
+
+export const SearchInput = ({ value, onChange, onSubmit }: SearchInputProps) => (
   <form onSubmit={onSubmit}>
     <div>
       Enter the name of a subreddit: {` `}

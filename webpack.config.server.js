@@ -32,6 +32,7 @@ module.exports = {
           babelrc: false,
           presets: [
             `react`,
+            `flow`,
           ],
           plugins: [
             `emotion`,

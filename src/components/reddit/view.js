@@ -1,8 +1,10 @@
+// @flow
 import React from 'react'
 import { Helmet } from 'react-helmet'
 
 import { SearchInput } from './search-input'
 import { TopicList } from './topic-list'
+import type { ViewProps } from './types'
 
 export const View = ({
   isLoading,
@@ -11,7 +13,7 @@ export const View = ({
   inputValue,
   onChangeInput,
   onSubmitInput,
-}) => (
+}: ViewProps) => (
   <div>
     <Helmet>
       <title>Reddit</title>
@@ -26,9 +28,9 @@ export const View = ({
     />
     {error ? (
       <p>There is no subreddit with that name.</p>
-    ) : isLoading ? (
+    ) : (isLoading) ? (
       'Loading...'
-    ) : (
+    ) : hotListings && (
       <TopicList listings={hotListings} />
     )}
   </div>

@@ -27,6 +27,7 @@ module.exports = {
           babelrc: false,
           presets: [
             `react`,
+            `flow`,
           ],
           plugins: [
             // "react-hot-loader/babel",
